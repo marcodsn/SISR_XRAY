@@ -9,6 +9,7 @@ venv/
 results/*
 !results/validation
 !results/validation/*.csv
+local/
 *.log
 
 # Data

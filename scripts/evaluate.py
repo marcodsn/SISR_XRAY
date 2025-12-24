@@ -38,7 +38,7 @@ def read_image(path, device):
 
 def evaluate_datasets():
     # --- Configuration ---
-    device = "cuda:1" if torch.cuda.is_available() else "cpu"
+    device = "cuda:0" if torch.cuda.is_available() else "cpu"
     print(f"Running evaluation on device: {device}")
 
     # Paths
