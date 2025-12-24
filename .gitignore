@@ -6,9 +6,9 @@ __pycache__/
 venv/
 
 # Project Specific Results
-results/
-results_eagle/
-results_unet/
+results/*
+!results/validation
+!results/validation/*.csv
 *.log
 
 # Data

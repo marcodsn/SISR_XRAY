@@ -14,7 +14,7 @@ from src.models.unet import UNetSR
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {DEVICE}")
 
-WEIGHTS_PATH = "results/unet/model_latest.pth"
+WEIGHTS_PATH = "results/training/unet/model_latest.pth"
 INPUT_DIR = "data/LR/"
 OUTPUT_DIR = "data/SR/unet"
 
