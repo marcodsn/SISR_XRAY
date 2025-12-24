@@ -7,3 +7,28 @@ As part of this project, we explored and compared generative and discriminative 
 Authors:
 - Marco De Santis (u/marcodsn)
 - Jessica Tavano (u/jessicatavano)
+
+
+## How to Use
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/marcodsn/SISR_XRAY.git
+   ```
+   
+2. Change into the project directory:
+   ```bash
+   cd SISR_XRAY
+   ```
+   
+3. Fetch the submodules:
+   ```bash
+   git submodule update --init --recursive
+   ```
+
+4. Install the required dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+   
+...TBD
