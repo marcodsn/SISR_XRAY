@@ -121,3 +121,28 @@ class UNetSR(nn.Module):
 
         # 2. RESIDUAL CONNECTION
         return input_image + residual
+
+
+if __name__ == "__main__":
+    model = UNetSR()
+    params = sum(p.numel() for p in model.parameters())
+    print(f"Model parameters: {params / 1e6:.2f}M")  # With default init: 13.39M
+
+    import time
+
+    model = model.to("cuda:0")
+    model = model.eval()
+    x = torch.randn(1, 1, 256, 256).to("cuda:0")
+    loops = 1000
+
+    # Warm-up
+    for _ in range(10):
+        _ = model(x)
+
+    start = time.time()
+    for _ in range(loops):
+        _ = model(x)
+    end = time.time()
+    print(
+        f"Average inference time: {(end - start) / loops * 1000:.2f} ms"
+    )  # 4.37 ms on RTX 3090 (250W PL) | 6.56 ms on RTX A4000 (140W PL) | 149.78 ms on i7-12700 CPU

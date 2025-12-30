@@ -153,3 +153,32 @@ def p_sample_loop_resshift(model, y_0, schedule):
         x_t = mu + torch.sqrt(var) * noise
 
     return x_t
+
+
+if __name__ == "__main__":
+    model = ConditionalUNet()
+    params = sum(p.numel() for p in model.parameters())
+    print(f"Model parameters: {params / 1e6:.2f}M")  # With default init: 10.51M
+
+    import time
+
+    model = model.to("cpu")
+    model = model.eval()
+    schedule = ResShiftSchedule(device="cpu")
+
+    x = torch.randn(1, 1, 256, 256).to("cpu")
+    loops = 100
+
+    # Warm-up
+    with torch.no_grad():
+        for _ in range(10):
+            y = p_sample_loop_resshift(model, x, schedule)
+
+    start = time.time()
+    with torch.no_grad():
+        for _ in range(loops):
+            y = p_sample_loop_resshift(model, x, schedule)
+    end = time.time()
+    print(
+        f"Average inference time: {(end - start) / loops * 1000:.2f} ms"
+    )  # 99.81 ms on RTX 3090 (250W PL) | 137.74 ms on RTX A4000 (140W PL) | 4039.75 ms on i7-12700 CPU
