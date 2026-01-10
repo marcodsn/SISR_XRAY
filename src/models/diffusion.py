@@ -162,12 +162,12 @@ if __name__ == "__main__":
 
     import time
 
-    model = model.to("cpu")
+    model = model.to("cuda:0")
     model = model.eval()
-    schedule = ResShiftSchedule(device="cpu")
+    schedule = ResShiftSchedule(device="cuda:0")
 
-    x = torch.randn(1, 1, 256, 256).to("cpu")
-    loops = 100
+    x = torch.randn(1, 1, 256, 256).to("cuda:0")
+    loops = 1000
 
     # Warm-up
     with torch.no_grad():
